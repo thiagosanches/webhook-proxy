@@ -1,0 +1,11 @@
+{
+    "team1":{
+        "webhookUrl": "<chat url>"
+    },
+    "team2":{
+        "webhookUrl": "<chat url>"
+    },
+    "team3":{
+        "webhookUrl": "<chat url>"
+    }
+}
