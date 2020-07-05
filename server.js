@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 const http = require('http');
 const https = require('https');
+const urlUtil = require('url');
 const hooks = require('./hooks.json');
 
 const PORT = 3000;
@@ -28,10 +29,12 @@ function createCard(message) {
   });
 }
 
-function sendCard(domain, path, card, callback) {
+function sendCard(url, card, callback) {
+  const parsedUrl = urlUtil.parse(url);
+
   const options = {
-    host: domain,
-    path,
+    host: parsedUrl.host,
+    path: parsedUrl.path,
     method: 'POST',
     headers: {
       'Content-Type': 'applicdation/json',
@@ -40,23 +43,23 @@ function sendCard(domain, path, card, callback) {
   };
 
   const cb = (res) => {
-    let body = '';
-
     res.on('error', (error) => {
       console.log(error);
       callback(error, null);
     });
 
-    res.on('data', (chunk) => {
-      body += chunk;
-    });
-
     res.on('end', () => {
-      callback(null, { res, body });
+      callback(null, res);
     });
   };
 
-  const req = https.request(options, cb);
+  let req;
+  if (parsedUrl.protocol === 'http:') {
+    req = http.request(options, cb);
+  } else {
+    req = https.request(options, cb);
+  }
+
   req.write(card);
   req.end();
 }
@@ -73,10 +76,9 @@ http.createServer((req, res) => {
     const bodyObject = JSON.parse(body);
 
     const card = createCard(bodyObject.message);
-    const { domain } = hooks[bodyObject.team];
-    const { path } = hooks[bodyObject.team];
+    const { url } = hooks[bodyObject.team];
 
-    const callback = (err, data) => {
+    const callback = (err, response) => {
       res.setHeader('Content-Type', 'application/json; charset=UTF-8');
       res.writeHead(200);
 
@@ -86,14 +88,13 @@ http.createServer((req, res) => {
         }));
       } else {
         res.end(JSON.stringify({
-          status: data.res.statusCode,
-          message: data.res.statusMessage,
-          body: data.body,
+          status: response.statusCode,
+          message: response.statusMessage,
         }));
       }
     };
 
-    sendCard(domain, path, card, callback);
+    sendCard(url, card, callback);
   });
 }).listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);

@@ -1,14 +1,11 @@
 {
     "team1": {
-        "domain": "postman-echo.com",
-        "path": "/post"
+        "url": "<chat url>"
     },
     "team2": {
-        "domain": "dummy.restapiexample.com",
-        "path": "/api/v1/create"
+        "url": "<chat url>"
     },
     "team3": {
-        "domain": "dummy.restapiexample.com",
-        "path": "/api/v1/create"
+        "url": "<chat url>"
     }
 }
