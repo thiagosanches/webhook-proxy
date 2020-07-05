@@ -32,6 +32,7 @@ function sendCard(domain, path, card, callback) {
     host: domain,
     path,
     method: 'POST',
+    port: 443,
     headers: {
       'Content-Type': 'applicdation/json',
       'Content-Length': card.length,
