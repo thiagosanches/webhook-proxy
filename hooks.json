@@ -1,0 +1,14 @@
+{
+    "team1": {
+        "domain": "postman-echo.com",
+        "path": "/post"
+    },
+    "team2": {
+        "domain": "dummy.restapiexample.com",
+        "path": "/api/v1/create"
+    },
+    "team3": {
+        "domain": "dummy.restapiexample.com",
+        "path": "/api/v1/create"
+    }
+}
