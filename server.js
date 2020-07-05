@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 const http = require('http');
+const https = require('https');
 const hooks = require('./hooks.json');
 
 const PORT = 3000;
@@ -32,7 +33,6 @@ function sendCard(domain, path, card, callback) {
     host: domain,
     path,
     method: 'POST',
-    port: 443,
     headers: {
       'Content-Type': 'applicdation/json',
       'Content-Length': card.length,
@@ -56,7 +56,7 @@ function sendCard(domain, path, card, callback) {
     });
   };
 
-  const req = http.request(options, cb);
+  const req = https.request(options, cb);
   req.write(card);
   req.end();
 }
