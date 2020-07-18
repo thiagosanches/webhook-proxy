@@ -56,6 +56,6 @@ curl http://localhost:3000 -X POST \
 ```
 
 # Kudos
-[ariellyparussulo](https://github.com/ariellyparussulo)
-[lucasbald](https://github.com/lucasbald)
-[rproenca](https://github.com/rproenca)
+* [ariellyparussulo](https://github.com/ariellyparussulo)
+* [lucasbald](https://github.com/lucasbald)
+* [rproenca](https://github.com/rproenca)
