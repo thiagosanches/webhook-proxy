@@ -22,7 +22,7 @@ git clone https://github.com/thiagosanches/webhook-proxy.git
 2. The webhookFallbackUrl is optional.
 3. Create a service account on Google Cloud and download the key json file.
 4. Grant permission to the service-account email (your-service-account@your-google-project.iam.gserviceaccount.com) to access your Google Spreadsheet.
-5. Edit your key.json file and add the spread sheet id and place it on besides `read-google-spreadsheet.js` file, for example:
+5. Edit your key json file and add the spread sheet id and place it on besides `read-google-spreadsheet.js` file with the name `key.json` for example:
 
 ```json
 {
