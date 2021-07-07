@@ -1,0 +1,34 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+parameters:
+- name: image
+  displayName: Pool Image
+  type: string
+  default: ubuntu-latest
+  values:
+  - windows-latest
+  - vs2017-win2016
+  - ubuntu-latest
+  - ubuntu-16.04
+  - macOS-latest
+  - macOS-10.14
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- script: |
+    npm install
+    npm run build
+  displayName: 'npm install and build'
