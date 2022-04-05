@@ -1,5 +1,5 @@
 const fetch = require('node-fetch')
-const readGoogleSpreadSheet = require('./read-google-spreadsheet')
+const dispatcher = require('./dispatcher')
 
 const express = require('express')
 const bodyParser = require('body-parser')
@@ -33,7 +33,7 @@ app.use(bodyParser.json())
 app.post('/', async (req, res) => {
   const body = req.body
   try {
-    const webhooks = await readGoogleSpreadSheet()
+    const webhooks = dispatcher
     const data = await fetch(webhooks[body.team].webhookUrl, {
       method: 'POST',
       headers: {
